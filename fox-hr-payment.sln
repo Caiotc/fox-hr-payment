@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "mobile-desktop-app", "mobile-desktop-app\mobile-desktop-app.csproj", "{D401D946-ECC9-424F-AD1B-E9B6CF9DBFEB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "fox-web-api", "fox-web-api\fox-web-api.csproj", "{EF90A2FF-3969-42AA-806E-D9CADD1758C8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D401D946-ECC9-424F-AD1B-E9B6CF9DBFEB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D401D946-ECC9-424F-AD1B-E9B6CF9DBFEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D401D946-ECC9-424F-AD1B-E9B6CF9DBFEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D401D946-ECC9-424F-AD1B-E9B6CF9DBFEB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EF90A2FF-3969-42AA-806E-D9CADD1758C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EF90A2FF-3969-42AA-806E-D9CADD1758C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EF90A2FF-3969-42AA-806E-D9CADD1758C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EF90A2FF-3969-42AA-806E-D9CADD1758C8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9E66F7AB-DE2E-46CC-BE2F-F6EC5387E29F}
+	EndGlobalSection
+EndGlobal
