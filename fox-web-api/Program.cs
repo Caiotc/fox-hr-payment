@@ -1,3 +1,5 @@
+using Microsoft.EntityFrameworkCore;
+
 namespace fox_web_api
 {
     public class Program
@@ -13,6 +15,11 @@ namespace fox_web_api
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
+            builder.Services.AddDbContext<AppDbContext>(options =>
+            {
+                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Defaulconnection not provided"));
+            });
+             
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
