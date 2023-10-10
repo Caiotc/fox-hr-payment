@@ -1,0 +1,33 @@
+version: '3.4'
+
+networks:
+  foxapp:
+    driver: bridge
+
+services:
+  foxhrdb:
+    container_name: fox-db
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    ports:
+    - 1433:8002
+    environment:
+    - ACCEPT_EULA=Y
+    - SA_PASSWORD=Fox12345678
+    networks:
+    - foxapp
+  fox-web-api:
+    container_name: fox-webapi
+    image: ${DOCKER_REGISTRY-}foxwebapi
+    build:
+      context: .
+      dockerfile: fox-web-api/Dockerfile
+    ports:
+    - 8001:80
+    depends_on:
+    - foxhrdb
+    environment:
+    - DB_HOST=foxhrdb
+    - DB_NAME=FoxHrPaymentSystem
+    - DB_SA_PASSWORD=Fox12345678
+    networks:
+    - foxapp
