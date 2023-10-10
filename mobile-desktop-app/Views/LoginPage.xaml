@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="mobile_desktop_app.Views.LoginPage"
+             Title="LoginPage">
+
+    <ContentPage.Content>
+
+        <Grid  ColumnSpacing="20" BackgroundColor="White">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <VerticalStackLayout Margin="20" VerticalOptions="CenterAndExpand" Grid.Column="0">
+                <Entry Placeholder="Login" Text="{Binding LoginRequestModel.UserName}"  TextColor="Black"/>
+
+                <Entry IsPassword="True" Placeholder="Password" TextColor="Black" Text="{Binding LoginRequestModel.Password}"/>
+
+                <Button Text="Login" BackgroundColor="Black"  Command="{Binding LoginCommand}" />
+
+            </VerticalStackLayout>
+
+            <Border Grid.Column="1" StrokeThickness="0" Margin="20" Background="#FBBF77">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="20,20,20,20"/>
+                </Border.StrokeShape>
+
+                <Border StrokeThickness="0">
+
+                    <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="CenterAndExpand" >
+
+                        <HorizontalStackLayout>
+                            <Label Text="Tenha acesso aos seus holerites" TextColor="Black"  />
+
+                        </HorizontalStackLayout >
+                        <HorizontalStackLayout HorizontalOptions="Fill" >
+                            <Label Text="O seu RH mais perto de você" TextColor="Black" FontAttributes="Bold" />
+                        </HorizontalStackLayout>
+
+                    </VerticalStackLayout>
+                </Border>
+
+            </Border>
+
+
+
+        </Grid>
+
+    </ContentPage.Content>
+</ContentPage>

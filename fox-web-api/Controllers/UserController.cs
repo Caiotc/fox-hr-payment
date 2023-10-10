@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-namespace fox_web_api
+namespace fox_web_api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -14,7 +14,7 @@ namespace fox_web_api
         public UserController(
             AppDbContext appDbContext)
         {
-            this._appDbContext = appDbContext;
+            _appDbContext = appDbContext;
         }
 
         [HttpGet]
@@ -25,23 +25,24 @@ namespace fox_web_api
         {
             if (email is not null || password is not null)
             {
-                User user = await _appDbContext.Users.Where(user => user.Email.ToLower().Equals(email.ToLower()) && 
+                User user = await _appDbContext.Users.Where(user => user.Email.ToLower().Equals(email.ToLower()) &&
                     user.Password.Equals(password))
                         .FirstOrDefaultAsync();
 
 
-                return user != null ? Ok(user) : NotFound(user);            
+                return user != null ? Ok(user) : NotFound(user);
             }
 
-            return BadRequest();        
+            return BadRequest();
         }
-        
+
 
         [HttpPost]
-        public async Task<ActionResult<User>> Add(User user){
+        public async Task<ActionResult<User>> Add(User user)
+        {
             if (user == null)
                 return BadRequest("Invalid Request");
-            var result = _appDbContext.Add<User>(user).Entity;
+            var result = _appDbContext.Add(user).Entity;
             await _appDbContext.SaveChangesAsync();
             return Ok(result);
         }

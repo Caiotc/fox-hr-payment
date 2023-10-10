@@ -1,4 +1,6 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 
 namespace fox_web_api
 {
@@ -8,7 +10,7 @@ namespace fox_web_api
         {
             var builder = WebApplication.CreateBuilder(args);
             string environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
-
+      
 
             // Add services to the container.
 
