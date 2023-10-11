@@ -9,7 +9,7 @@ services:
     container_name: fox-db
     image: mcr.microsoft.com/mssql/server:2022-latest
     ports:
-    - 1433:8002
+    - 8002:1433
     environment:
     - ACCEPT_EULA=Y
     - SA_PASSWORD=Fox12345678
