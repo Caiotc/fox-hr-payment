@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="mobile_desktop_app.Views.UserCreationPage"
+             
+               xmlns:ViewModel="clr-namespace:mobile_desktop_app.ViewModels"
+  x:DataType="ViewModel:UserCreationViewModel"
+ xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             
+             Title="UserCreationPage">
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior IsVisible="False" IsEnabled="False" />
+    </Shell.BackButtonBehavior>
+
+    <Grid ColumnDefinitions="*,*">
+        <VerticalStackLayout Grid.Column="0" BackgroundColor="Orange">
+            <Grid ColumnDefinitions="100,*" HorizontalOptions="Fill"  AbsoluteLayout.LayoutBounds=".5,.3,.8,.2" AbsoluteLayout.LayoutFlags="All" >
+                <Image Source="fox_icon.png" HorizontalOptions="Start" Grid.Column="0"/>
+                <Label 
+         Grid.Column="1"
+         Text="SEU RH MAIS PRÓXIMO DE VOCÊ" 
+         CharacterSpacing="10"
+         TextColor="Black" 
+         FontAttributes="Bold" 
+         HorizontalOptions="Start" 
+         VerticalOptions="FillAndExpand"
+         VerticalTextAlignment="Center"
+                               
+         />
+            </Grid>
+            <toolkit:AvatarView CornerRadius="100"  WidthRequest="100" HeightRequest="100">
+                <Image Source="{Binding UserInfo.userImage}"/>
+            </toolkit:AvatarView>
+
+            <Label Text="{Binding UserInfo.employee.name}" HorizontalTextAlignment="Center" TextColor="Black" HorizontalOptions="Fill" Margin="0,10"/>
+
+
+            <Border  StrokeShape="RoundRectangle 10,10,10,10" Margin="50,30">
+                <Button Text="Voltar"  BackgroundColor="DarkOrange" TextColor="Black" Command="{Binding GoLogedCommand}"/>
+            </Border>
+        </VerticalStackLayout>
+
+        <Border Grid.Column="1" BackgroundColor="Wheat" >
+            <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="FillAndExpand" >
+
+                <toolkit:AvatarView CornerRadius="100"  WidthRequest="100" HeightRequest="100">
+                    <Image Source="fox_icon"/>
+                </toolkit:AvatarView>
+                <Grid ColumnDefinitions="100,*" RowDefinitions="*,*,*,*,*,*,*,*" HorizontalOptions="FillAndExpand" Padding="20,20" ColumnSpacing="0" RowSpacing="2">
+
+                    <Label Grid.Column="0" Grid.Row="0" Text="Nome: " VerticalTextAlignment="Center" TextColor="Black" />
+                    <Border Grid.Column="1" Grid.Row="0" Background="white" StrokeShape="RoundRectangle 10,10,10,10" HorizontalOptions="FillAndExpand">
+                        <Entry TextColor="Black" Placeholder="Nome"  />
+                    </Border>
+
+                    <Label Grid.Column="0" Grid.Row="1" Text="CPF: "  VerticalTextAlignment="Center" TextColor="Black"/>
+                    <Border Grid.Column="1" Grid.Row="1" Background="white" StrokeShape="RoundRectangle 10,10,10,10">
+                        <Entry TextColor="Black" Placeholder="CPF" />
+                    </Border>
+
+                    <Label Grid.Column="0" Grid.Row="2" Text="Email: " VerticalTextAlignment="Center" TextColor="Black"/>
+                    <Border  Grid.Column="1" Grid.Row="2" Background="white" StrokeShape="RoundRectangle 10,10,10,10">
+                        <Entry TextColor="Black" Placeholder="Email" />
+                    </Border>
+
+                    <Label Grid.Column="0" Grid.Row="3" Text="Endereço: " VerticalTextAlignment="Center" TextColor="Black"/>
+                    <Border  Grid.Column="1" Grid.Row="3" Background="white" StrokeShape="RoundRectangle 10,10,10,10">
+                        <Entry TextColor="Black" Placeholder="Endereço" />
+                    </Border>
+
+                    <Label Grid.Column="0" Grid.Row="4" Text="Data de Nascimento: " VerticalTextAlignment="Center" TextColor="Black" />
+                    <DatePicker Grid.Column="1" Grid.Row="4" MinimumDate="01/01/1950" MaximumDate="12/31/2022" TextColor="Black" />
+
+                    <Label Grid.Column="0" Grid.Row="5" Text="Data de admissão: "  VerticalTextAlignment="Center" TextColor="Black" />
+                    <DatePicker Grid.Column="1" Grid.Row="5" MinimumDate="01/01/2022" MaximumDate="12/31/2022" TextColor="Black" />
+
+                    <Label Grid.Column="0" Grid.Row="6" Text="Cargo: "  VerticalTextAlignment="Center" TextColor="Black" />
+                    <Border Grid.Column="1" Grid.Row="6" Background="white" StrokeShape="RoundRectangle 10,10,10,10">
+                        <Entry TextColor="Black" Placeholder="Cargo" />
+                    </Border>
+
+                    <Label Grid.Column="0" Grid.Row="7" Text="Salário: "  VerticalTextAlignment="Center" TextColor="Black" />
+                    <Border Grid.Column="1" Grid.Row="7" Background="white" StrokeShape="RoundRectangle 10,10,10,10">
+                        <Entry TextColor="Black" Placeholder="Salário" />
+                    </Border>
+                </Grid>
+
+                <Border  StrokeShape="RoundRectangle 10,10,10,10" Margin="50,30">
+                    <Button Text="Criar" BackgroundColor="DarkOrange" TextColor="Black" />
+                </Border>
+            </VerticalStackLayout>
+
+        </Border>
+
+    </Grid>
+</ContentPage>

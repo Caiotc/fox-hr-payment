@@ -21,7 +21,7 @@ namespace mobile_desktop_app.Services
         public AuthService()
         {
             userInfo = ServiceHelper.GetService<UserInfo>();    
-            client = new RestClient("https://localhost:51767/api/");
+            client = new RestClient("https://localhost:61516/api/");
         }
 
         public async Task<RestResponse> ChangePasswordAsync(string userName,string password,string newPassword)
@@ -76,7 +76,10 @@ namespace mobile_desktop_app.Services
                 userInfo.username = result.username;
                 userInfo.userPhoto = result.userPhoto;
                 userInfo.role = result.role;
-                userInfo.roleId = result.roleId;              
+                userInfo.roleId = result.roleId;
+                userInfo.id = result.id;
+                userInfo.employeeId = result.employeeId;
+                userInfo.employee = result.employee;
             }
                            
         }

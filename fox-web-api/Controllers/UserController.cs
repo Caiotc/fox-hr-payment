@@ -66,11 +66,11 @@ namespace fox_web_api.Controllers
         }
 
         [HttpPost("login")]
-        public async Task<ActionResult<UserDto>> Login(UserDto request)
+        public async Task<ActionResult<LoginDto>> Login(UserDto request)
         {
             if (request.Username is not null)
             {
-                User user = await _appDbContext.Users.Where(user => user.Username.Equals(request.Username)).Include(user => user.Role).FirstOrDefaultAsync();
+                User user = await _appDbContext.Users.Where(user => user.Username.Equals(request.Username)).Include(user => user.Role).Include(user => user.Employee).FirstOrDefaultAsync();
                 if (user == null)
                     return NotFound();
                 
@@ -79,16 +79,19 @@ namespace fox_web_api.Controllers
                 string token = CreateToken(user);
 
 
-                return Ok(new {
+                return Ok(new LoginDto{
+                    Id = user.Id,
                     JwtBearer = token,
                     Username = user.Username,
                     RoleId = user.RoleId,
                     UserPhoto = user.UserPhoto,
+                    EmployeeId = (int)user.EmployeeId,
                     Role = new Role()
                     {
                         Id = user.RoleId,
                         SystemRole = user.Role.SystemRole
-                    }
+                    },
+                    Employee = user.Employee, 
                 });
             }
 

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using fox_web_api;
 
@@ -11,9 +12,11 @@ using fox_web_api;
 namespace fox_web_api.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231023043107_addingDepartmentTables")]
+    partial class addingDepartmentTables
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -58,9 +61,6 @@ namespace fox_web_api.Data.Migrations
                     b.Property<DateTime>("AdmissionDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("BirthDate")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("CPF")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -72,14 +72,10 @@ namespace fox_web_api.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<decimal>("Income")
-                        .HasColumnType("money");
+                    b.Property<double>("Income")
+                        .HasColumnType("float");
 
                     b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Position")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 

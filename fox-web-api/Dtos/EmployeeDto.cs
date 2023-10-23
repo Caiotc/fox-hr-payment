@@ -2,17 +2,22 @@
 
 namespace fox_web_api.Dtos
 {
-    public class EmployeeDto
+    public class EmployeeDto 
     {
-        public int Id { get; set; }
         public string Name { get; set; }
-        public string CPF { get; set; }
         public string Address { get; set; }
-        public string Adjutancy { get; set; }
+
         public DateTime AdmissionDate { get; set; }
+        public DateTime BirthDate { get; set; }
+        public string CPF { get; set; }
 
-        public int UserId { get; set; }
+        public int DepartmentId { get; set; }
+        public string Email  { get; set; }
+        public string Position { get; set; }
 
+        public decimal Income { get; set; }
+
+        public string UserPhoto { get; set; }
 
     }
 }

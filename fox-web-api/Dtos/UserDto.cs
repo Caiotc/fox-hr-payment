@@ -11,5 +11,6 @@ namespace fox_web_api.Dtos
         public string Password { get; set; }
 
         public int RoleId { get; set; }
+
     }
 }

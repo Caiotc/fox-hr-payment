@@ -5,6 +5,7 @@ using mobile_desktop_app.Models;
 using mobile_desktop_app.Services;
 using mobile_desktop_app.ViewModels;
 using mobile_desktop_app.Views;
+using Windows.Networking.NetworkOperators;
 
 namespace mobile_desktop_app;
 
@@ -38,7 +39,7 @@ public static class MauiProgram
 		builder.Services.AddTransient<Loged>();
 		builder.Services.AddTransient<ProfilePage>();
 		builder.Services.AddTransient<ChangePassword>();
-
+		builder.Services.AddTransient<UserCreationPage>();
 
         builder.Services.AddSingleton<AppShell>();
 		// view Models
@@ -46,6 +47,7 @@ public static class MauiProgram
 		builder.Services.AddTransient<LogedViewModel>();
 		builder.Services.AddTransient<ProfilePageViewModel>();
 		builder.Services.AddTransient<ChangePasswordViewModel>();
+		builder.Services.AddTransient<UserCreationViewModel>();
 
 
         // services

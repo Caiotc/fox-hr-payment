@@ -52,7 +52,7 @@
                     <Image Source="{Binding UserInfo.userImage}"/>
                </toolkit:AvatarView>
 
-               <Label Text="{Binding UserInfo.username}" HorizontalTextAlignment="Center" TextColor="Black" HorizontalOptions="Fill"/>
+               <Label Text="{Binding UserInfo.employee.name}" HorizontalTextAlignment="Center" TextColor="Black" HorizontalOptions="Fill"/>
 
 
                 <Border StrokeShape="RoundRectangle 10,10,10,10" >
@@ -82,7 +82,7 @@
             
             <Border Background="white" StrokeShape="RoundRectangle 10,10,10,10" BackgroundColor="Wheat">
 
-                <Button  Text="Cadastrar Novo Funcionário" BackgroundColor="DarkOrange" TextColor="Black" />
+                <Button  Text="Cadastrar Novo Funcionário" BackgroundColor="DarkOrange" TextColor="Black" Command="{Binding GotoUserCreationCommand}" />
             </Border>
 
             <Border Background="white" StrokeShape="RoundRectangle 10,10,10,10" BackgroundColor="Wheat">

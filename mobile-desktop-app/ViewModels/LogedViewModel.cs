@@ -40,5 +40,11 @@ namespace mobile_desktop_app.ViewModels
             await Shell.Current.GoToAsync(nameof(ChangePassword));
         }
 
+        [RelayCommand]
+        private async Task GotoUserCreation()
+        {
+            await Shell.Current.GoToAsync(nameof(UserCreationPage));
+        }
+
     }
 }
