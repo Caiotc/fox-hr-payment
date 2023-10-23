@@ -1,4 +1,5 @@
-﻿using fox_web_api.Dtos;
+﻿using Azure.Core;
+using fox_web_api.Dtos;
 using fox_web_api.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -26,11 +27,46 @@ namespace fox_web_api.Controllers
             _configuration = configuration;
         }
 
-        [HttpGet,Authorize(Roles="Admin")]
+
+     
+        [HttpGet, Authorize(Roles = "Admin")]
         public async Task<ActionResult<IList<User>>> Get() => await _appDbContext.Users.ToListAsync();
 
+
+        [HttpPut("changePassword"),Authorize]
+        public async Task<ActionResult<User>> ChangePassword(NewUserDto request)
+        {
+            if (request.Username is not null)
+            {
+                User user = await _appDbContext.Users.Where(user => user.Username.Equals(request.Username)).Include(user => user.Role).FirstOrDefaultAsync();
+                
+                
+                if (user == null)
+                    return NotFound();
+
+
+                if (VerifyPasswordHash(request.Password, user.PasswordHash, user.PasswordSalt))
+                {
+                    CreatePasswordHash(request.NewPassword, out byte[] passwordHash, out byte[] passwordSalt);
+
+                    user.PasswordHash = passwordHash;
+                    user.PasswordSalt = passwordSalt;
+                    _appDbContext.Update(user);
+                    _appDbContext.SaveChanges();
+                    return Ok(user);
+
+                }
+
+
+               
+            }
+
+            return BadRequest();
+
+        }
+
         [HttpPost("login")]
-        public async Task<ActionResult<string>> Login(UserDto request)
+        public async Task<ActionResult<UserDto>> Login(UserDto request)
         {
             if (request.Username is not null)
             {
@@ -40,9 +76,20 @@ namespace fox_web_api.Controllers
                 
                 if (!VerifyPasswordHash(request.Password, user.PasswordHash, user.PasswordSalt))
                     return BadRequest("Wrong password");
-
                 string token = CreateToken(user);
-                return Ok(token);
+
+
+                return Ok(new {
+                    JwtBearer = token,
+                    Username = user.Username,
+                    RoleId = user.RoleId,
+                    UserPhoto = user.UserPhoto,
+                    Role = new Role()
+                    {
+                        Id = user.RoleId,
+                        SystemRole = user.Role.SystemRole
+                    }
+                });
             }
 
             return BadRequest();

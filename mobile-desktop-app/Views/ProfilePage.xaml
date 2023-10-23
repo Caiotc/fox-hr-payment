@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="mobile_desktop_app.Views.ProfilePage"
+              xmlns:ViewModel="clr-namespace:mobile_desktop_app.ViewModels"
+              x:DataType="ViewModel:ProfilePageViewModel"
+                              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+
+            Shell.NavBarIsVisible="False"
+            Shell.TabBarIsVisible="False"
+            Shell.FlyoutBehavior="Disabled"
+             Title="ProfilePage">
+
+        <Grid ColumnDefinitions="*,*">
+            <VerticalStackLayout Grid.Column="0" BackgroundColor="Orange">
+            <Grid ColumnDefinitions="100,*" HorizontalOptions="Fill"  AbsoluteLayout.LayoutBounds=".5,.3,.8,.2" AbsoluteLayout.LayoutFlags="All" >
+                <Image Source="fox_icon.png" HorizontalOptions="Start" Grid.Column="0"/>
+                <Label 
+                 Grid.Column="1"
+                 Text="SEU RH MAIS PRÓXIMO DE VOCÊ" 
+                 CharacterSpacing="10"
+                 TextColor="Black" 
+                 FontAttributes="Bold" 
+                 HorizontalOptions="Start" 
+                 VerticalOptions="FillAndExpand"
+                 VerticalTextAlignment="Center"
+                                       
+                 />
+            </Grid>
+            <toolkit:AvatarView CornerRadius="100"  WidthRequest="100" HeightRequest="100">
+                    <Image Source="{Binding UserInfo.userImage}"/>
+                </toolkit:AvatarView>
+
+            <Label Text="{Binding UserInfo.username}" HorizontalTextAlignment="Center" TextColor="Black" HorizontalOptions="Fill" Margin="0,10"/>
+            
+                
+            <Border  StrokeShape="RoundRectangle 10,10,10,10" Margin="50,30">
+                <Button Text="Voltar"  BackgroundColor="DarkOrange" TextColor="Black" Command="{Binding GoLogedCommand}"/>
+            </Border>
+        </VerticalStackLayout>
+
+            <VerticalStackLayout Grid.Column="1" BackgroundColor="Wheat">
+                
+            </VerticalStackLayout>
+            
+        </Grid>
+      
+</ContentPage>
