@@ -23,6 +23,11 @@ namespace mobile_desktop_app.ViewModels
         private LoginRequestModel myLoginRequestModel = new LoginRequestModel();
 
 
+
+        [ObservableProperty]
+        public bool failedToLogin;
+
+
         
 
         
@@ -41,14 +46,38 @@ namespace mobile_desktop_app.ViewModels
         private async Task PerformLoginOperation(object obj)
         {
            var data = MyLoginRequestModel;
-            await _authService.IsAuthenticatedAsync(data.UserName, data.Password);
 
-
-            if (_userInfo.jwtBearer != "")
+            try
             {
-                
-                await Shell.Current.GoToAsync(nameof(Loged));
+                var response = await _authService.IsAuthenticatedAsync(data.UserName, data.Password);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var result = JsonSerializer.Deserialize<UserInfo>(response.Content!);
+
+                    _userInfo.jwtBearer = "Bearer " + result.jwtBearer;
+                    _userInfo.username = result.username;
+                    _userInfo.userPhoto = result.userPhoto;
+                    _userInfo.role = result.role;
+                    _userInfo.roleId = result.roleId;
+                    _userInfo.id = result.id;
+                    _userInfo.employeeId = result.employeeId;
+                    _userInfo.employee = result.employee;
+
+                    await Shell.Current.GoToAsync(nameof(Loged));
+
+                }
+                else
+                    FailedToLogin = true;
             }
+            catch (Exception)
+            {
+                FailedToLogin = true;
+
+                throw;
+            }
+
+
         }
 
     }

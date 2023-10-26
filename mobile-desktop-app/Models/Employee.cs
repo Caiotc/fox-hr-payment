@@ -17,7 +17,11 @@ namespace mobile_desktop_app.Models
 
         public decimal income { get; set; }
         public DateTime admissionDate { get; set; }
+        public DateTime birthDate { get; set; }
 
+        public string position { get; set; }
+
+        public string? userPhoto { get; set; }
         public int departmentId { get; set; }
     }
 }

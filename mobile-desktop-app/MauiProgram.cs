@@ -5,7 +5,6 @@ using mobile_desktop_app.Models;
 using mobile_desktop_app.Services;
 using mobile_desktop_app.ViewModels;
 using mobile_desktop_app.Views;
-using Windows.Networking.NetworkOperators;
 
 namespace mobile_desktop_app;
 

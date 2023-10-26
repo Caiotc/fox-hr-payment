@@ -10,6 +10,7 @@ using System.Text.Json.Nodes;
 using static System.Net.Mime.MediaTypeNames;
 using mobile_desktop_app.Models;
 using mobile_desktop_app.Helpers;
+using System.Text.RegularExpressions;
 
 namespace mobile_desktop_app.Services
 {
@@ -21,9 +22,25 @@ namespace mobile_desktop_app.Services
         public AuthService()
         {
             userInfo = ServiceHelper.GetService<UserInfo>();    
-            client = new RestClient("https://localhost:61516/api/");
+            client = new RestClient("https://localhost:56508/api/");
         }
+        public async Task<RestResponse> AddEmployee(Employee employee)
+        {
+            var request = new RestRequest("Employee", Method.Post);
+            Regex regex = new Regex(@"^[\w/\:.-]+;base64,");
+            request.AddBody(employee);
 
+            request.AddHeaders(new Dictionary<string, string>()
+            {
+                { "content-type","application/json" },
+                {"accept", "text/plain" },
+                {"Authorization",userInfo.jwtBearer }
+            });
+
+            var response = await client.ExecutePostAsync(request);
+
+            return response;
+        }
         public async Task<RestResponse> ChangePasswordAsync(string userName,string password,string newPassword)
         {
             var request = new RestRequest("User/changePassword", Method.Put);
@@ -48,7 +65,7 @@ namespace mobile_desktop_app.Services
 
         }
 
-        public  async Task IsAuthenticatedAsync(string userName, string password)
+        public  async Task<RestResponse> IsAuthenticatedAsync(string userName, string password)
         {
         
            
@@ -66,21 +83,9 @@ namespace mobile_desktop_app.Services
                 {"accept", "text/plain" }
             });
 
-          var response = await client.ExecutePostAsync(request);
+          return await client.ExecutePostAsync(request);
 
-            if (response.IsSuccessStatusCode)
-            {
-                var result = JsonSerializer.Deserialize<UserInfo>(response.Content!);
-
-                userInfo.jwtBearer = "Bearer " + result.jwtBearer;
-                userInfo.username = result.username;
-                userInfo.userPhoto = result.userPhoto;
-                userInfo.role = result.role;
-                userInfo.roleId = result.roleId;
-                userInfo.id = result.id;
-                userInfo.employeeId = result.employeeId;
-                userInfo.employee = result.employee;
-            }
+            
                            
         }
     }

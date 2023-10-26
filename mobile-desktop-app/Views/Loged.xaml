@@ -48,6 +48,7 @@
         </Grid>
 
             <VerticalStackLayout Grid.Row="1" Spacing="10"  HorizontalOptions="CenterAndExpand" >
+                
                 <toolkit:AvatarView CornerRadius="100"  WidthRequest="100" HeightRequest="100">
                     <Image Source="{Binding UserInfo.userImage}"/>
                </toolkit:AvatarView>

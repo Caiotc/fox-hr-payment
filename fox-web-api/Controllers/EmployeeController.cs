@@ -29,7 +29,7 @@ namespace fox_web_api.Controllers
             _configuration = configuration;
         }
 
-        [HttpGet("{id:int}"), Authorize]
+        [HttpGet("{id:int}")]
         public async Task<ActionResult<Employee>> GetById(int id) {
             var employee = await _appDbContext.Employees.Where(employee => employee.Id == id).Include(employee=>employee.Department).FirstOrDefaultAsync();
             if (employee == null)
@@ -40,7 +40,7 @@ namespace fox_web_api.Controllers
         }
 
 
-        [HttpPost, Authorize]
+        [HttpPost,Authorize]
         public async Task<ActionResult<Employee>> Post(EmployeeDto employee)
         {
             if (employee is not null)

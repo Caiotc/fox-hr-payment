@@ -30,7 +30,7 @@ namespace fox_web_api.Controllers
 
      
         [HttpGet, Authorize(Roles = "Admin")]
-        public async Task<ActionResult<IList<User>>> Get() => await _appDbContext.Users.ToListAsync();
+        public async Task<ActionResult<IList<User>>> Get() => await _appDbContext.Users.Include(user=>user.Employee).ToListAsync();
 
 
         [HttpPut("changePassword"),Authorize]

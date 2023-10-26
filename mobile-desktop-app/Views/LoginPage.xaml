@@ -44,6 +44,9 @@
                     <Entry TextColor="Black" Placeholder="password"  Text="{Binding MyLoginRequestModel.Password}" IsPassword="True" />
                 </Border>
 
+                <Label Text="O login falhou, verifique suas credenciais e tente novamente" HorizontalTextAlignment="Center" TextColor="Red" HorizontalOptions="Fill" Margin="0,10" IsVisible="{Binding FailedToLogin}"/>
+
+
                 <Border Background="white" StrokeShape="RoundRectangle 10,10,10,10" BackgroundColor="Wheat">
 
                     <Button x:Name="LoginButton" Text="Login" Command="{Binding PerformLoginOperationCommand}" BackgroundColor="DarkOrange" TextColor="Black" />

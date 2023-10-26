@@ -8,6 +8,16 @@
  xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              
              Title="UserCreationPage">
+    <ContentPage.Resources>
+        <Style x:Key="InvalidEntryStyle" TargetType="Entry">
+            <Setter Property="TextColor" Value="Red" />
+        </Style>
+        <Style x:Key="ValidEntryStyle" TargetType="Entry">
+            <Setter Property="TextColor" Value="Green" />
+        </Style>
+    </ContentPage.Resources>
+
+
     <Shell.BackButtonBehavior>
         <BackButtonBehavior IsVisible="False" IsEnabled="False" />
     </Shell.BackButtonBehavior>
@@ -28,7 +38,7 @@
                                
          />
             </Grid>
-            <toolkit:AvatarView CornerRadius="100"  WidthRequest="100" HeightRequest="100">
+            <toolkit:AvatarView CornerRadius="100"  WidthRequest="100" HeightRequest="100" >
                 <Image Source="{Binding UserInfo.userImage}"/>
             </toolkit:AvatarView>
 
@@ -38,58 +48,89 @@
             <Border  StrokeShape="RoundRectangle 10,10,10,10" Margin="50,30">
                 <Button Text="Voltar"  BackgroundColor="DarkOrange" TextColor="Black" Command="{Binding GoLogedCommand}"/>
             </Border>
+            
+            <Label Text="cadastro de funcionário falhou, verifique os dados e tente novamente" HorizontalTextAlignment="Center" TextColor="Red" HorizontalOptions="Fill" Margin="0,10" IsVisible="{Binding FailedOnRegister}"/>
+            <Label Text="Funcionário cadastrado com sucesso!" HorizontalTextAlignment="Center" TextColor="ForestGreen" HorizontalOptions="Fill" Margin="0,10" IsVisible="{Binding SuccesfullyRegister}"/>
+
         </VerticalStackLayout>
-
+        
+        
         <Border Grid.Column="1" BackgroundColor="Wheat" >
-            <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="FillAndExpand" >
+            <ScrollView>
+                            
+                <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="FillAndExpand" >
 
-                <toolkit:AvatarView CornerRadius="100"  WidthRequest="100" HeightRequest="100">
-                    <Image Source="fox_icon"/>
-                </toolkit:AvatarView>
-                <Grid ColumnDefinitions="100,*" RowDefinitions="*,*,*,*,*,*,*,*" HorizontalOptions="FillAndExpand" Padding="20,20" ColumnSpacing="0" RowSpacing="2">
+
+                <Border  StrokeShape="RoundRectangle 10,10,10,10" Margin="50,30">
+                    <Button Text="Upload da foto" BackgroundColor="DarkOrange" TextColor="Black" Command="{Binding SelectUserPhotoCommand}" />
+                </Border>
+
+                <Label Text="O upload da foto falhou!" HorizontalTextAlignment="Center" TextColor="Red" HorizontalOptions="Fill" Margin="0,10" IsVisible="{Binding FailedOnUpload}"/>
+                <Label Text="Foto carregada em memória com sucesso" HorizontalTextAlignment="Center" TextColor="ForestGreen" HorizontalOptions="Fill" Margin="0,10" IsVisible="{Binding SuccesfullyUploaded}"/>
+
+
+                <Grid ColumnDefinitions="100,*" RowDefinitions="*,*,*,*,*,*,*,*,*" HorizontalOptions="FillAndExpand" Padding="20,20" ColumnSpacing="0" RowSpacing="2">
 
                     <Label Grid.Column="0" Grid.Row="0" Text="Nome: " VerticalTextAlignment="Center" TextColor="Black" />
                     <Border Grid.Column="1" Grid.Row="0" Background="white" StrokeShape="RoundRectangle 10,10,10,10" HorizontalOptions="FillAndExpand">
-                        <Entry TextColor="Black" Placeholder="Nome"  />
+                        <Entry TextColor="Black" Placeholder="Nome" Text="{Binding Name}"  />
                     </Border>
 
                     <Label Grid.Column="0" Grid.Row="1" Text="CPF: "  VerticalTextAlignment="Center" TextColor="Black"/>
                     <Border Grid.Column="1" Grid.Row="1" Background="white" StrokeShape="RoundRectangle 10,10,10,10">
-                        <Entry TextColor="Black" Placeholder="CPF" />
+                            <Entry TextColor="Black" Placeholder="CPF"  Text="{Binding Cpf}"/>
                     </Border>
 
                     <Label Grid.Column="0" Grid.Row="2" Text="Email: " VerticalTextAlignment="Center" TextColor="Black"/>
-                    <Border  Grid.Column="1" Grid.Row="2" Background="white" StrokeShape="RoundRectangle 10,10,10,10">
-                        <Entry TextColor="Black" Placeholder="Email" />
+                        <Border  Grid.Column="1" Grid.Row="2" Background="white" StrokeShape="RoundRectangle 10,10,10,10">
+                            <Entry TextColor="Black" Placeholder="Email"  Text="{Binding Email}" />
                     </Border>
 
                     <Label Grid.Column="0" Grid.Row="3" Text="Endereço: " VerticalTextAlignment="Center" TextColor="Black"/>
                     <Border  Grid.Column="1" Grid.Row="3" Background="white" StrokeShape="RoundRectangle 10,10,10,10">
-                        <Entry TextColor="Black" Placeholder="Endereço" />
+                                <Entry TextColor="Black" Placeholder="Endereço"  Text="{Binding Adress}"/>
                     </Border>
 
                     <Label Grid.Column="0" Grid.Row="4" Text="Data de Nascimento: " VerticalTextAlignment="Center" TextColor="Black" />
-                    <DatePicker Grid.Column="1" Grid.Row="4" MinimumDate="01/01/1950" MaximumDate="12/31/2022" TextColor="Black" />
+                    <DatePicker Grid.Column="1" Grid.Row="4" MinimumDate="01/01/1950" MaximumDate="12/31/2022" TextColor="Black" Date="{Binding BirthDate}" />
 
                     <Label Grid.Column="0" Grid.Row="5" Text="Data de admissão: "  VerticalTextAlignment="Center" TextColor="Black" />
-                    <DatePicker Grid.Column="1" Grid.Row="5" MinimumDate="01/01/2022" MaximumDate="12/31/2022" TextColor="Black" />
+                        <DatePicker Grid.Column="1" Grid.Row="5" MinimumDate="01/01/2022" MaximumDate="12/31/2022" TextColor="Black" Date="{Binding AdmissionDate}" />
 
                     <Label Grid.Column="0" Grid.Row="6" Text="Cargo: "  VerticalTextAlignment="Center" TextColor="Black" />
                     <Border Grid.Column="1" Grid.Row="6" Background="white" StrokeShape="RoundRectangle 10,10,10,10">
-                        <Entry TextColor="Black" Placeholder="Cargo" />
+                        <Entry TextColor="Black" Placeholder="Cargo" Text="{Binding Position}" />
                     </Border>
 
-                    <Label Grid.Column="0" Grid.Row="7" Text="Salário: "  VerticalTextAlignment="Center" TextColor="Black" />
-                    <Border Grid.Column="1" Grid.Row="7" Background="white" StrokeShape="RoundRectangle 10,10,10,10">
-                        <Entry TextColor="Black" Placeholder="Salário" />
+
+                    <Label Grid.Column="0" Grid.Row="7" Text="Departamento: "  VerticalTextAlignment="Center" TextColor="Black" />
+                    
+                    <Border Grid.Column="1" Grid.Row="7" BackgroundColor="Orange" StrokeShape="RoundRectangle 10,10,10,10" Padding="10">
+                        <Picker HorizontalOptions="CenterAndExpand" Title="Selecione um departamento" TitleColor="Black" TextColor="Black" ItemsSource="{Binding Departments}" ItemDisplayBinding="{Binding Name}" SelectedItem="{Binding SelectedDepartment}"/>
+                    </Border>
+
+                    <Label Grid.Column="0" Grid.Row="8" Text="Salário: "  VerticalTextAlignment="Center" TextColor="Black" />
+                    <Border Grid.Column="1" Grid.Row="8" Background="white" StrokeShape="RoundRectangle 10,10,10,10">
+                            <Entry x:Name="income" TextColor="Black" Placeholder="Salário" Text="{Binding Income}" >
+
+                                <Entry.Behaviors>
+                                    <toolkit:NumericValidationBehavior 
+                                        InvalidStyle="{StaticResource InvalidEntryStyle}"
+                                        ValidStyle="{StaticResource ValidEntryStyle}"
+                                        Flags="ValidateOnValueChanged"
+                                        MinimumValue="1.0"
+                                        MaximumValue="100.0"
+                                        MaximumDecimalPlaces="2" />
+                                </Entry.Behaviors>
+                            </Entry>
                     </Border>
                 </Grid>
 
                 <Border  StrokeShape="RoundRectangle 10,10,10,10" Margin="50,30">
-                    <Button Text="Criar" BackgroundColor="DarkOrange" TextColor="Black" />
+                    <Button Text="Criar" BackgroundColor="DarkOrange" TextColor="Black" Command="{Binding AddEmployeeCommand}" />
                 </Border>
             </VerticalStackLayout>
-
+            </ScrollView>
         </Border>
 
     </Grid>
