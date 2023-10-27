@@ -83,7 +83,7 @@ namespace fox_web_api
                 }
             }
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
 
             app.UseAuthentication();
             app.UseAuthorization();

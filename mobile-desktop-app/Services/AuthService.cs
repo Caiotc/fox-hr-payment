@@ -22,7 +22,7 @@ namespace mobile_desktop_app.Services
         public AuthService()
         {
             userInfo = ServiceHelper.GetService<UserInfo>();    
-            client = new RestClient("https://localhost:56508/api/");
+            client = new RestClient("https://10.0.2.2:54549/api/");
         }
         public async Task<RestResponse> AddEmployee(Employee employee)
         {
