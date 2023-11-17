@@ -1,0 +1,95 @@
+﻿@page "/"
+@using SharedUI.Data.UserLogin;
+@using SharedUI.Data;
+@using SharedUI.Services;
+@using System.Text.Json;
+@inject ApiHelper apiHelper
+@inject LogedUser logedUser
+@inject AppState appState
+@inject NavigationManager NavigationManager
+
+
+
+
+<PageTitle>Index</PageTitle>
+
+
+
+    <EditForm Model="@userLoginModel" OnValidSubmit="@Submit" class="MyEditClass" style="
+    height:100%;
+    width:100%; 
+    display:flex; 
+    flex-direction: column;
+    justify-content: center;
+    padding:10%;
+    gap:1rem;
+    background-color:orange;
+"
+       >
+        <DataAnnotationsValidator/>
+
+            <div class="logo-wrapper">
+                
+                <img src="/Images/fox_icon.png"  class="logo" />
+                <span class="logo-title">
+                    SEU RH MAIS PRÓXIMO DE VOCÊ
+                </span>
+            </div>
+            <div class="form-group ">
+                <label for="inputUserName" class="form-label">UserName</label>
+                <InputText id="inputUserName" class="form-control" @bind-Value="@userLoginModel.UserName"  placeholder="Username" />
+                <ValidationMessage For="@(()=> userLoginModel.UserName)"></ValidationMessage>
+            </div>
+
+            <div class="form-group ">
+                <label for="inputPassword" class="form-label">Password</label>
+                <InputText type="password" id="inputPassword" class="form-control" @bind-Value="@userLoginModel.Password"  placeholder="password" />
+                <ValidationMessage For="@(()=> userLoginModel.Password)"></ValidationMessage>
+            </div>
+
+            <button type="submit" class="btn btn-login">
+                Login
+            </button>   
+</EditForm>
+
+
+
+
+
+
+@code{
+    UserLoginModel userLoginModel;
+   readonly string imageSource = "Assets/fox-icon.png";
+
+    protected override void OnInitialized()
+    {
+        userLoginModel = new UserLoginModel();
+    }
+
+    public async Task Submit()
+    {
+        var result = await  apiHelper.IsAuthenticatedAsync(userLoginModel.UserName, userLoginModel.Password);
+
+        if (result.IsSuccessStatusCode)
+        {
+            var response = JsonSerializer.Deserialize<LogedUser>(result.Content!);
+
+            logedUser.jwtBearer = "Bearer " + response.jwtBearer;
+            logedUser.username = response.username;
+            logedUser.userPhoto = response.userPhoto;
+            logedUser.role = response.role;
+            logedUser.roleId = response.roleId;
+            logedUser.id = response.id;
+            logedUser.employeeId = response.employeeId;
+            logedUser.employee = response.employee;
+
+            appState.LoggedIn = true;
+            if(response.roleId == 1)
+            NavigationManager.NavigateTo("adminHub");
+            else
+                NavigationManager.NavigateTo("employeeHub");
+
+        }
+
+    }
+}

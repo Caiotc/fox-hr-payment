@@ -29,6 +29,21 @@ namespace fox_web_api.Controllers
             _configuration = configuration;
         }
 
+        [HttpGet]
+        public async Task<ActionResult<IList<Employee>>> Get()
+        {
+            var employee = await _appDbContext.Employees.Include(employee => employee.Department).ToListAsync();
+            if(employee.Count > 0)
+            {
+                return Ok(employee);
+            }
+            else
+            {
+                return Ok(new List<Employee>()); 
+                    
+            }
+        }
+
         [HttpGet("{id:int}")]
         public async Task<ActionResult<Employee>> GetById(int id) {
             var employee = await _appDbContext.Employees.Where(employee => employee.Id == id).Include(employee=>employee.Department).FirstOrDefaultAsync();
@@ -75,7 +90,7 @@ namespace fox_web_api.Controllers
                 });
                 _appDbContext.SaveChanges();
 
-                return Ok(insertEmployee);
+               return Ok(insertEmployee);
 
             }
 

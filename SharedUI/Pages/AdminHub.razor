@@ -1,0 +1,32 @@
+﻿@page "/adminHub"
+@inject NavigationManager NavigationManager
+
+
+
+<div class="wrapper" >
+
+    <div class="btn-wrapper">
+        <span>Olá administrador, o que deseja fazer?</span>
+        <button class="btn dark-orange" @onclick="@GoToAddEmployee">Cadastrar novo funcionário</button>
+        <button class="btn dark-orange" @onclick="@NavigateToSearchEmployee">Buscar funcionário</button>
+        <button class="btn dark-orange" @onclick="@NavigateToPaymentEmmission">Emitir pagamento</button>
+    </div>
+
+</div>
+
+@code {
+    public void GoToAddEmployee()
+    {
+        NavigationManager.NavigateTo("AddEmployee");
+    }
+
+    public void NavigateToSearchEmployee()
+    {
+        NavigationManager.NavigateTo("allEmployee");
+    }
+
+    public void NavigateToPaymentEmmission()
+    {
+        NavigationManager.NavigateTo("emitPayment");
+    }
+}

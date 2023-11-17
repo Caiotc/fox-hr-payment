@@ -9,7 +9,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "fox-web-api", "fox-web-api\
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{6E4B32AA-EA6D-4F84-82F3-0CC7678EF2B3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web-fox-hr", "Web-fox-hr\Web-fox-hr.csproj", "{AED5F43B-DC40-42DA-ACA8-5BDF2D84E0F5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorApp.Server", "BlazorApp\Server\BlazorApp.Server.csproj", "{12F5E91F-64EB-4C7D-BD36-F39F407EF538}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorApp.Client", "BlazorApp\Client\BlazorApp.Client.csproj", "{4FC3B7F8-F4B8-4BB7-9235-23E6A61B56D8}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorApp.Shared", "BlazorApp\Shared\BlazorApp.Shared.csproj", "{E5FFFA57-062C-4DBE-B7F9-C96AF1C59FD7}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Maui-app", "Maui-app\Maui-app.csproj", "{FA3E01CA-FFB5-4105-97EE-F9888C8528F6}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharedUI", "SharedUI\SharedUI.csproj", "{F9A4ED0A-5C2D-498A-98AD-F4BFB04803EB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -30,12 +38,28 @@ Global
 		{6E4B32AA-EA6D-4F84-82F3-0CC7678EF2B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6E4B32AA-EA6D-4F84-82F3-0CC7678EF2B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6E4B32AA-EA6D-4F84-82F3-0CC7678EF2B3}.Release|Any CPU.Build.0 = Release|Any CPU
-		{AED5F43B-DC40-42DA-ACA8-5BDF2D84E0F5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AED5F43B-DC40-42DA-ACA8-5BDF2D84E0F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AED5F43B-DC40-42DA-ACA8-5BDF2D84E0F5}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
-		{AED5F43B-DC40-42DA-ACA8-5BDF2D84E0F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AED5F43B-DC40-42DA-ACA8-5BDF2D84E0F5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{AED5F43B-DC40-42DA-ACA8-5BDF2D84E0F5}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{12F5E91F-64EB-4C7D-BD36-F39F407EF538}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{12F5E91F-64EB-4C7D-BD36-F39F407EF538}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{12F5E91F-64EB-4C7D-BD36-F39F407EF538}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{12F5E91F-64EB-4C7D-BD36-F39F407EF538}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4FC3B7F8-F4B8-4BB7-9235-23E6A61B56D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4FC3B7F8-F4B8-4BB7-9235-23E6A61B56D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4FC3B7F8-F4B8-4BB7-9235-23E6A61B56D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4FC3B7F8-F4B8-4BB7-9235-23E6A61B56D8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E5FFFA57-062C-4DBE-B7F9-C96AF1C59FD7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E5FFFA57-062C-4DBE-B7F9-C96AF1C59FD7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E5FFFA57-062C-4DBE-B7F9-C96AF1C59FD7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E5FFFA57-062C-4DBE-B7F9-C96AF1C59FD7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FA3E01CA-FFB5-4105-97EE-F9888C8528F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FA3E01CA-FFB5-4105-97EE-F9888C8528F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FA3E01CA-FFB5-4105-97EE-F9888C8528F6}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{FA3E01CA-FFB5-4105-97EE-F9888C8528F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FA3E01CA-FFB5-4105-97EE-F9888C8528F6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FA3E01CA-FFB5-4105-97EE-F9888C8528F6}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{F9A4ED0A-5C2D-498A-98AD-F4BFB04803EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F9A4ED0A-5C2D-498A-98AD-F4BFB04803EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F9A4ED0A-5C2D-498A-98AD-F4BFB04803EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F9A4ED0A-5C2D-498A-98AD-F4BFB04803EB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

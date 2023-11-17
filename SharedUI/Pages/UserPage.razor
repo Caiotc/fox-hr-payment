@@ -1,0 +1,62 @@
+﻿@page "/UserPage"
+@using SharedUI.Data;
+@inject LogedUser logedUser
+@inject NavigationManager NavigationManager
+
+
+
+<div class="wrapper">
+    <div class="card-wrapper">
+        <div class="col-md-4 ">
+            <div class="card profile-card-5">
+                <div class="card-img-block">
+                    <img class="card-img-top" src="@logedUser.userImage" alt="Card image cap">
+                </div>
+                <div class="card-body pt-0">
+                    <div class="field-value-wrapper">
+                        <h5 class="card-title">@logedUser.employee.name</h5>
+                    </div>
+
+                    <div class="field-value-wrapper">
+                        <span>CPF:</span>
+                        <span>@logedUser.employee.cpf</span>
+                    </div>
+
+                    <div class="field-value-wrapper">
+                        <span>Email:</span>
+                        <span>@logedUser.employee.email</span>
+                    </div>
+                    <div class="field-value-wrapper">
+                        <span>Endereço:</span>
+                        <span>@logedUser.employee.address</span>
+                    </div>
+                    <div class="field-value-wrapper">
+                        <span>Salário:</span>
+                        <span>@logedUser.employee.income.ToString("0.00")</span>
+                    </div>
+
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+      
+    <button type="submit" class="btn btn-login" @onclick="@GoToAdminHub">
+        voltar
+    </button>
+
+</div>
+
+@code {
+
+    public void GoToAdminHub()
+    {
+
+        if (logedUser.roleId == 1)
+            NavigationManager.NavigateTo("adminHub");
+        else
+            NavigationManager.NavigateTo("employeeHub");
+     
+    }
+}

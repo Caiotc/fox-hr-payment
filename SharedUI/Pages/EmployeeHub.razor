@@ -1,0 +1,51 @@
+﻿@page "/employeeHub"
+@using SharedUI.Data;
+@using SharedUI.Services;
+@using System.Text.Json;
+@inject IJSRuntime JS
+@inject LogedUser logedUser;
+@inject ApiHelper apiHelper
+
+
+
+<div class="wrapper">
+
+    <div class="btn-wrapper">
+        <span>Faça o download do seu holerite</span>
+        <button class="btn dark-orange" @onclick="@OpenToIframe">Ver holerite</button>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div id="iframeId"></div>
+        </div>
+    </div>
+</div>
+@code {
+    bool render = false;
+    IList<Payment>? payments;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var result = await apiHelper.GetALlPayments(logedUser.employee.cpf);
+
+        if (result.IsSuccessStatusCode)
+        {
+            this.payments = JsonSerializer.Deserialize<IList<Payment>>(result.Content!);
+        }
+        
+    }
+
+
+    private void OpenToIframe()
+    {
+        var pdf = new PDFGenerator(payments, logedUser);
+        pdf.ViewPdf(JS, "iframeId");
+        render = true;
+        //NavigationManager.NavigateTo("AddEmployee");
+    }
+
+
+
+
+
+}

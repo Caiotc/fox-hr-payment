@@ -1,0 +1,36 @@
+﻿@using SharedUI.Data;
+@using SharedUI.Services;
+@inherits LayoutComponentBase
+@inject LogedUser logedUser
+@implements IDisposable
+@inject AppState appState
+
+
+
+<div class="page">
+    @if (logedUser.jwtBearer != "")
+    {
+        <div class="sidebar">
+            <NavMenu />
+        </div>
+    }
+
+    <main>
+        
+        @Body
+    </main>
+</div>
+
+@code{
+    protected override void OnInitialized()
+    {
+        appState.OnChange += StateHasChanged;
+    }
+
+    public void Dispose()
+    {
+        appState.OnChange -= StateHasChanged;
+    }
+}
+
+

@@ -1,0 +1,56 @@
+﻿@using SharedUI.Data;
+@using SharedUI.Services;
+@inject LogedUser logedUser
+@inject AppState appState
+@inject NavigationManager NavigationManager
+
+
+
+<div class="top-row ps-3 navbar navbar-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="">@logedUser.employee.name</a>
+        <button title="Navigation menu" class="navbar-toggler" @onclick="ToggleNavMenu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </div>
+</div>
+
+<div class="@NavMenuCssClass nav-scrollable" @onclick="ToggleNavMenu">
+    <nav class="flex-column">
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="UserPage">
+                <span class="oi oi-person" aria-hidden="true"></span> Perfil
+            </NavLink>
+        </div>
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="changePassword">
+                <span class="oi oi-key" aria-hidden="true"></span> Alterar Senha
+            </NavLink>
+        </div>
+        <div class="nav-item px-3">
+                        <NavLink class="nav-link" @onclick="MoveHome" Match="NavLinkMatch.All">
+                <span class="oi oi-home" aria-hidden="true"></span> Sair
+            </NavLink>
+        </div>
+    </nav>
+</div>
+
+@code {
+    private bool collapseNavMenu = true;
+
+    private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
+
+    private void ToggleNavMenu()
+    {
+        collapseNavMenu = !collapseNavMenu;
+    }
+
+    private void MoveHome()
+    {
+        logedUser.jwtBearer = string.Empty ;
+        appState.LoggedIn = false;
+        NavigationManager.NavigateTo("");
+
+
+    }
+}

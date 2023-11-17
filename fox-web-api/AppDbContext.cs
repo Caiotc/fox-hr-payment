@@ -11,6 +11,8 @@ namespace fox_web_api
 
         public DbSet<Department> Departments { get; set; } = default!;
 
+        public DbSet<Payment> Payments { get; set; } = default!;
+
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
             

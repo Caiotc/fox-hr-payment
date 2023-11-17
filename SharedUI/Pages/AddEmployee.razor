@@ -1,0 +1,191 @@
+﻿@page "/addEmployee"
+
+@using SharedUI.Data;
+@using SharedUI.Services;
+@inject ApiHelper apiHelper
+@inject NavigationManager NavigationManager
+
+
+<EditForm Model="@employee" OnValidSubmit="@Submit" class="MyEditClass" style="
+    height:100vh;
+    width:100%;
+    display:flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding:3rem 10%;
+    gap:1rem;
+    background-color:wheat;
+">
+    <DataAnnotationsValidator />
+
+    <div class="logo-wrapper">
+     
+
+    </div>
+    <div >
+            <label class="form-label">Foto usuário</label>
+            <InputFile OnChange="@LoadFiles" multiple />
+
+
+
+        <div class="field-value-wrapper">
+            <label for="inputUserName" class="form-label">Nome:</label>
+            <InputText id="inputUserName" class="form-control" @bind-Value="@employee.name" placeholder="Name" />
+        </div>
+        <ValidationMessage For="@(()=> employee.name)"></ValidationMessage>
+
+
+
+
+        <div class="field-value-wrapper">
+            <label for="inputDocument" class="form-label">CPF:</label>
+            <InputText id="inputDocument" class="form-control" @bind-Value="@employee.cpf" placeholder="CPF" />
+        </div>
+        <ValidationMessage For="@(()=> employee.cpf)"></ValidationMessage>
+
+
+
+        <div class="field-value-wrapper">
+            <label for="inputEmail" class="form-label">Email:</label>
+            <InputText type="email" id="inputEmail" class="form-control" @bind-Value="@employee.email" placeholder="email" />
+        </div>
+        <ValidationMessage For="@(()=> employee.email)"></ValidationMessage>
+
+
+
+        <div class="field-value-wrapper">
+            <label for="inputAddress" class="form-label">Endereço</label>
+            <InputText id="inputAddress" class="form-control" @bind-Value="@employee.address" placeholder="Endereço" />
+        </div>
+        <ValidationMessage For="@(()=> employee.address)"></ValidationMessage>
+
+
+
+        <div class="field-value-wrapper">
+            <label for="inputBirthDate" class="form-label">Data de nascimento</label>
+            <InputDate id="inputBirthDate" @bind-Value="@employee.birthDate" placeholder="Data de nascimento" EnableMinMax="true" />
+        </div>
+        <ValidationMessage For="@(()=> employee.birthDate)"></ValidationMessage>
+
+
+
+        <div class="field-value-wrapper">
+            <label for="inputAdmissionDate" class="form-label">Data de contratação</label>
+            <InputDate id="inputAdmissionDate" @bind-Value="@employee.admissionDate" placeholder="Data de contratação" EnableMinMax="true" />
+        </div>
+        <ValidationMessage For="@(()=> employee.admissionDate)"></ValidationMessage>
+
+
+
+        <div class="field-value-wrapper">
+            <label for="inputAdmissionDate" class="form-label">Departamento</label>
+            <select id="inputAdmissionDate" @bind="@employee.departmentId" placeholder="Departamento" class="form-select">
+                @foreach (var department in departments)
+                {
+                    <option value="@department.Id">@department.Name</option>
+                }
+            </select>
+        </div>
+        <ValidationMessage For="@(()=> employee.departmentId)"></ValidationMessage>
+
+
+
+        <div class="field-value-wrapper">
+            <label for="inputPosition" class="form-label">Cargo:</label>
+            <InputText id="inputPosition" class="form-control" @bind-Value="@employee.position" placeholder="position" />
+        </div>
+        <ValidationMessage For="@(()=> employee.position)"></ValidationMessage>
+
+
+        <div class="field-value-wrapper">
+            <label for="inputIncome" class="form-label">Salário:</label>
+            <InputNumber type="email" id="inputIncome" class="form-control" @bind-Value="@employee.income" placeholder="salário" />
+            <ValidationMessage For="@(()=> employee.income)"></ValidationMessage>
+        </div>
+
+
+   
+
+
+    </div>
+
+    <button type="submit" class="btn btn-login">
+        Adicionar funcionário
+    </button>
+
+    <button type="submit" class="btn btn-login" @onclick="@GoToAdminHub">
+        voltar
+    </button>
+
+    @if (success)
+    {
+        <div>
+            Funcionario adicionado com sucesso
+        </div>
+    }
+    @if (fail)
+    {
+        <div>
+            Algo ocorreu de errado, tente novamente mais tarde 
+        </div>
+    }
+</EditForm>
+
+@code {
+    Employee employee;
+    bool success = false;
+    bool fail = false;
+
+
+
+    IList<Departament> departments = new List<Departament>()
+        {
+            new Departament(){Id=1,Name="TI",Description="TECNOLOGIA DA INFORMAÇÃO" },
+            new Departament(){Id=2,Name="Vendas",Description="Departamento responsável por vendas e negociações" },
+            new Departament(){Id=3,Name="Financeiro",Description="Departamento responsável por finanças e contabilidade" },
+            new Departament(){Id=1,Name="RH",Description="Departamento responsável por recursos humanos" },
+        };
+
+    protected override void OnInitialized()
+    {
+        employee = new Employee();
+    }
+
+    public async Task Submit()
+    {
+
+        var result = await apiHelper.AddEmployee(employee);
+
+        if (result.IsSuccessStatusCode)
+        {
+            success = true;
+            fail = false;
+        }
+        else
+        {
+            success = false;
+            fail = true;
+        }
+
+    }
+
+    public async Task LoadFiles(InputFileChangeEventArgs e)
+    {
+        var file = e.GetMultipleFiles().FirstOrDefault();
+        if(file != null)
+        {
+            var buffer = new byte[file.Size];
+            using(var stream = file.OpenReadStream())
+            {
+                await stream.ReadAsync(buffer, 0, buffer.Length);
+            }
+            employee.userPhoto = Convert.ToBase64String(buffer);
+        }
+
+    }
+
+    public void GoToAdminHub()
+    {
+        NavigationManager.NavigateTo("adminHub");
+    }
+}

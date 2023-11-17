@@ -7,7 +7,7 @@ namespace fox_web_api.Dtos
         public int Id { get; set; }
         public string JwtBearer { get; set; }
 
-        public string UserPhoto { get; set; }
+        public string? UserPhoto { get; set; }
 
         public Role Role { get; set; }
 

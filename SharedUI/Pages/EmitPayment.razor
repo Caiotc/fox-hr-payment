@@ -1,0 +1,80 @@
+﻿@page "/emitPayment"
+@using SharedUI.Services;
+@inject ApiHelper apiHelper
+@inject NavigationManager NavigationManager
+
+<div  class="MyEditClass" style="
+    height:100%;
+    width:100%;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    padding:10%;
+    gap:1rem;
+    background-color:wheat;
+">
+
+    <div class="logo-wrapper">
+        <span class="logo-title">
+            Insira o cpf do funcionário e clique em emitir pagamento
+        </span>
+    </div>
+    <div class="form-group ">
+        <label for="inputUserName" class="form-label" >cpf</label>
+        <input  id="inputUserName" class="form-control" @bind="@cpf" placeholder="cpf" />
+    </div>
+
+    @if (success == true)
+    {
+        <div>
+            pagamento emitido com sucesso
+        </div>
+    }
+    @if(fail == true)
+    {
+        <div>
+            Oops! algo aconteceu tente novament mais tarde
+        </div>
+    }
+
+
+    <button  class="btn btn-login" @onclick="Pay">
+        Emitir pagamento
+    </button>
+
+    <button  class="btn btn-login" @onclick="@Hub">
+        voltar
+    </button>
+
+
+</div>
+@code {
+
+    string cpf = string.Empty;
+    bool success = false;
+    bool fail = false;
+
+ 
+    public async Task Pay()
+    {
+        this.success = false;
+        this.fail = false;
+        var result = await apiHelper.PerformPayments(cpf);
+        if (result.IsSuccessStatusCode)
+        {
+            this.success = true;
+            this.fail = false;
+
+        }
+        else
+        {
+            this.success = false;
+            this.fail = true;
+        }
+    }
+    public void Hub()
+    {       
+            NavigationManager.NavigateTo("adminHub");        
+    }
+
+}

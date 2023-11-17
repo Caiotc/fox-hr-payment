@@ -30,7 +30,20 @@ namespace fox_web_api
                 };
             });
 
-            builder.Services.AddAuthorization(); 
+            builder.Services.AddAuthorization();
+            var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy(MyAllowSpecificOrigins,
+                                      policy =>
+                                      {
+                                          policy
+                                                .AllowAnyHeader()
+                                                .AllowAnyMethod().AllowAnyOrigin();
+                                      });
+            });
+
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
@@ -90,6 +103,8 @@ namespace fox_web_api
 
 
             app.MapControllers();
+
+            app.UseCors(MyAllowSpecificOrigins);
 
             app.Run();
         }

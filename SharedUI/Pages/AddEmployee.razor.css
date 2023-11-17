@@ -1,0 +1,18 @@
+﻿.field-value-wrapper {
+    display:flex;
+    flex-direction:row;
+    justify-content:flex-start;
+    align-items:center;
+    overflow-y:auto;
+
+    margin:0.1rem;
+
+}
+
+logo-wrapper{
+
+}
+
+.btn-login {
+    background-color: darkorange;
+}

@@ -1,0 +1,13 @@
+﻿
+.btn-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+.dark-orange {
+    background-color: darkorange;
+    width: 100%;
+}

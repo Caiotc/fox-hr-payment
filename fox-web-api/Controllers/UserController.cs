@@ -79,7 +79,7 @@ namespace fox_web_api.Controllers
                 string token = CreateToken(user);
 
 
-                return Ok(new LoginDto{
+                return Ok(new LoginDto(){
                     Id = user.Id,
                     JwtBearer = token,
                     Username = user.Username,
@@ -95,7 +95,7 @@ namespace fox_web_api.Controllers
                 });
             }
 
-            return BadRequest();
+            return BadRequest(); 
         }
 
         private string CreateToken(User user)
